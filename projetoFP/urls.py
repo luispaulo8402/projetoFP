@@ -13,5 +13,6 @@ urlpatterns = patterns('',
     url(r'^pessoas/', include('pessoas.urlsPessoas')),
     url(r'^caixas/', include('caixas.urlsCaixas')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^pagseguro/', include('djpg.urls')),
+    url(r'^produtos/', include('produtos.urlsProdutos')),
+    #url(r'^pagseguro/', include('djpg.urls')),
 )
