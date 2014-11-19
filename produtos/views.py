@@ -1,9 +1,11 @@
 # This Python file uses the following encoding: utf-8
 # ANOTAÇÃO PARA USAR CARACTERES ESPECIAIS AQUI. (MESMO PARA ANOTAÇÕES.)
 
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect,HttpResponse
 from django.db.models import Q #Queries complexas
 from produtos.models import Produto
+from produtos.forms import produtoForm
+import string
 
 def produtoListar(request):
     produtos = Produto.objects.all()[0:10]
@@ -13,29 +15,39 @@ def produtoListar(request):
     #produtos.append(Produto(nome='NOME1', email='MAIL', telefone='TELEFONE'))
     #produtos.append(Produto(nome='NOME2'))
 
-    return render(request, 'produtos/listaProdutoss.html', {'produtos': produtos})
+    return render(request, 'listaProdutos.html', {'produtos': produtos})
 
 
 def produtoAdicionar(request):
-    return render(request, 'produtos/formProdutos.html')
+    form = produtoForm()
+    return render(request,'formProdutos.html',{'form':form})
 
 def produtoSalvar(request):
-    if request.method == 'POST':
-        codigo = request.POST.get('codigo', '0')
+     if request.method == 'POST':
+        form = produtoForm(request.POST)
 
-        try:
-            produto = Produto.objects.get(pk=codigo)
-        except:
-            produto = Produto()
-
-        produto.nome = request.POST.get('nome', '').upper()
-        produto.quantidade = request.POST.get('quantidade', '').upper()
-        produto.observacao = request.POST.get('observacao', '').upper()
-        produto.modelo = request.POST.get('modelo', '').upper()
-
-        produto.save()
-        
-    return HttpResponseRedirect('/produtos/')
+        if form.is_valid():
+            
+            if(form.data['pk']):
+                produto = Produto.objects.get(pk=form.data['pk'])
+                produto.nome=string.replace(string.replace(form.data['nome'],"(u'",""),"',)","")
+                produto.quantidade=string.replace(string.replace(form.data['quantidade'],"(u'",""),"',)","")
+                produto.observacao=string.replace(string.replace(form.data['observacao'],"(u'",""),"',)","")
+                produto.modelo=string.replace(string.replace(form.data['modelo'],"(u'",""),"',)","")
+                
+            else:
+                
+                produto = Produto(
+                    nome=form.data['nome'], 
+                    quantidade=form.data['quantidade'],
+                    observacao=form.data['observacao'],
+                    modelo=form.data['modelo']
+                )
+                
+            produto.save()
+            return HttpResponseRedirect('/produtos/')
+        else:
+            return render(request,'formProdutos.html',{'form':form})
 
 def produtoPesquisar(request):
     if request.method == 'POST':
@@ -43,7 +55,7 @@ def produtoPesquisar(request):
 
         try:
             if textoBusca == 'TUDO':
-                produtos = Produtos.objects.all()
+                produtos = Produto.objects.all()
             else: 
                 produtos = Produto.objects.filter(
                     (Q(nome__contains=textoBusca) |  
@@ -52,15 +64,22 @@ def produtoPesquisar(request):
         except:
             produtos = []
 
-        return render(request, 'produtos/listaProdutos.html', {'produtos': produtos, 'textoBusca': textoBusca})
+        return render(request, 'listaProdutos.html', {'produtos': produtos, 'textoBusca': textoBusca})
 
 def produtoEditar(request, pk=0):
-    try:
-        produto = Produto.objects.get(pk=pk)
-    except:
-        return HttpResponseRedirect('/produtos/')
 
-    return render(request, 'produtos/formProdutos.html', {'produto': produto})
+        produto = Produto.objects.get(pk=pk)
+        
+        data = {
+            'nome':produto.nome,
+            'quantidade':produto.quantidade,
+            'observacao':produto.observacao,
+            'modelo':produto.modelo
+               }
+        
+        form = produtoForm(data)
+        return render(request,'formProdutos.html',{'form':form,'pk':pk})
+
 
 def produtoExcluir(request, pk=0):
     try:

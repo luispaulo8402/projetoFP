@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-class Produtos (models.Model):
+class Produto (models.Model):
     nome = models.CharField(max_length=100)
     quantidade = models.CharField(max_length=500)
     observacao = models.CharField(max_length=200)
@@ -10,4 +10,5 @@ class Produtos (models.Model):
         verbose_name = _('produto')
         verbose_name_plural = _('produtos')
 
-    def __unicode__(self): return self.nome 
+    def __unicode__(self): 
+        return self.nome 

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Cadastrar Produtos{% endblock titulo %}
+
+{% block conteudo %}
+
+<form action="/produtos/salvar/" method="POST">
+	{% csrf_token %}
+	{{ form.as_p }}<br />
+    {% if pk %}
+        <input type="hidden" value="{{ pk }}" name="pk" >
+    {% else %}
+        <input type="hidden" value="" name="pk" >
+    {% endif %}
+	<input type="submit" value="Salvar" />
+</form>
+
+{% endblock conteudo %}
