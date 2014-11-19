@@ -85,6 +85,6 @@ def produtoExcluir(request, pk=0):
     try:
         produto = Produto.objects.get(pk=pk)
         produto.delete()
-       
+        return HttpResponseRedirect('/produtos/')
     except:
         return HttpResponseRedirect('/produtos/')
