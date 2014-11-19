@@ -18,6 +18,9 @@ def produtoListar(request):
     return render(request, 'listaProdutos.html', {'produtos': produtos})
 
 
+def produtoAdicionar(request):
+    form = produtoForm()
+    return render(request,'formProdutos.html',{'form':form})
 
 def produtoSalvar(request):
      if request.method == 'POST':
