@@ -15,4 +15,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^produtos/', include('produtos.urlsProdutos')),
     #url(r'^pagseguro/', include('djpg.urls')),
+                       url(r'^il8n/', include('django.conf.urls.il8n')),
 )
