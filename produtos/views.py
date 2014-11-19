@@ -7,15 +7,6 @@ from produtos.models import Produto
 from produtos.forms import produtoForm
 import string
 
-def produtoListar(request):
-    produtos = Produto.objects.all()[0:10]
-
-    # TESTE LOCAL PARA VERIFICAR SE A TABELA ESTA LISTANDO
-    #produtos = []
-    #produtos.append(Produto(nome='NOME1', email='MAIL', telefone='TELEFONE'))
-    #produtos.append(Produto(nome='NOME2'))
-
-    return render(request, 'listaProdutos.html', {'produtos': produtos})
 
 
 def produtoAdicionar(request):
