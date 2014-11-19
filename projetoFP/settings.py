@@ -46,7 +46,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'dejango.middleware.locale.LocaleMiddleware,'
+    'django.middleware.locale.LocaleMiddleware',
+    
 )
 
 ROOT_URLCONF = 'projetoFP.urls'

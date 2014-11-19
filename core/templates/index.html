@@ -1,4 +1,28 @@
 {% extends 'base.html' %}
+{% load i18n %}
+
+<a href="#" onclick="document.setLangEnglish.submit();return false;">English</a>
+<form name="setLangEnglish" action="/i18n/setlang/" method="POST">
+	{% csrf_token %}
+	<input name="next" type="hidden" value="/" />
+	<input type="hidden" name="language" value="en" />
+</form>
+
+<a href="#" onclick="document.setLangPortugues.submit();return false;">Português</a>
+<form name="setLangPortugues" action="/i18n/setlang/" method="POST">
+	{% csrf_token %}
+	<input name="next" type="hidden" value="/" />
+	<input type="hidden" name="language" value="pt-br" />
+</form>
+
+<br />
+Tradução vinda do Django: {{ recado do django }}
+<br />
+Tradução direto no Template: {% trans "Direto no Template" %}
+<br />
+Tradução direto no Template (Bloco): {% blocktrans %}Esse é o bloco de conteúdo{% endblocktrans %}
+<br />
+
 
 {% block titulo %}Principal{% endblock titulo %}
 

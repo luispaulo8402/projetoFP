@@ -14,6 +14,6 @@ urlpatterns = patterns('',
     url(r'^caixas/', include('caixas.urlsCaixas')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^produtos/', include('produtos.urlsProdutos')),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
     #url(r'^pagseguro/', include('djpg.urls')),
-    url(r'^il8n/', include('django.conf.urls.il8n')),
 )

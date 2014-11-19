@@ -5,7 +5,7 @@ from django.shortcuts import render, HttpResponseRedirect,HttpResponse
 from django.db.models import Q #Queries complexas
 from produtos.models import Produto
 from produtos.forms import produtoForm
-from django.utils.trasnlation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 import string
 
 def produtoListar(request):
