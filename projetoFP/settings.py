@@ -45,6 +45,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'dejango.middleware.locale.LocaleMiddleware,'
 )
 
 ROOT_URLCONF = 'projetoFP.urls'
@@ -69,6 +71,9 @@ LANGUAGE_CODE = 'pt-BR'
 LANGUAGE = (
 ('pt - br', 'Brasil'),
     ('en','Eua'),
+)
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR,'locale'),
 )
 TIME_ZONE = 'UTC'
 
