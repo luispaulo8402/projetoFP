@@ -66,7 +66,10 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 LANGUAGE_CODE = 'pt-BR'
-
+LANGUAGE = (
+('pt - br', 'Brasil'),
+    ('en','Eua'),
+)
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
