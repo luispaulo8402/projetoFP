@@ -66,19 +66,6 @@ def produtoPesquisar(request):
 
         return render(request, 'listaProdutos.html', {'produtos': produtos, 'textoBusca': textoBusca})
 
-def produtoEditar(request, pk=0):
-
-        produto = Produto.objects.get(pk=pk)
-        
-        data = {
-            'nome':produto.nome,
-            'quantidade':produto.quantidade,
-            'observacao':produto.observacao,
-            'modelo':produto.modelo
-               }
-        
-        form = produtoForm(data)
-        return render(request,'formProdutos.html',{'form':form,'pk':pk})
 
 
 def produtoExcluir(request, pk=0):

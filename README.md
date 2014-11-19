@@ -55,5 +55,5 @@ MIT
 **Free Software, Hell Yeah!**
 
 
-**- Edson Lopes**
+**- Luis Paulo**
     
