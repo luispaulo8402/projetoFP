@@ -35,7 +35,7 @@ def produtoSalvar(request):
                 produto.observacao=string.replace(string.replace(form.data['observacao'],"(u'",""),"',)","")
                 produto.modelo=string.replace(string.replace(form.data['modelo'],"(u'",""),"',)","")
                 
-       else:
+            else:
                 
                 produto = Produto(
                     nome=form.data['nome'], 
@@ -47,7 +47,7 @@ def produtoSalvar(request):
             produto.save()
             return HttpResponseRedirect('/produtos/')
         else:
-            return render(request,'formProdutos.html',{'form':form})     
+            return render(request,'formProdutos.html',{'form':form})
 
 def produtoPesquisar(request):
     if request.method == 'POST':
